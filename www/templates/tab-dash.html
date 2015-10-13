@@ -1,42 +1,42 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding">
-    <div class="list card">
-      <div class="item item-divider">Recent Updates</div>
-      <div class="item item-body">
-        <div>
-          There is a fire in <b>sector 3</b>
-        </div>
-      </div>
-    </div>
-
     <div class="card">
-    <div class="item">
-        <button ng-click="scanBarcode()" class="button button-block button-positive">
+        <div class="item item-divider">Hacker Lookup ( Last checked in: {{last_checked_in}})</div>
+        <div class="item">
+          <button ng-click="scanBarcode()" class="button button-block button-positive">
             <i class="icon ion-qr-scanner"></i>
-            Scan Now
+            Scan Code
             </button>
         </div>
+        <div class="item">
+          <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="search" ng-model="$parent.input_email" placeholder="email">
+            
+          </label>
+          <button ng-click="processEmail()" class="button button-block button-positive">
+              Lookup
+              </button>
+        </div>
     </div>
-    <div class="card">
-        <div class="item item-divider">Scan Results</div>
-        <div class="item item-text-wrap">{{code}}
-    </div>
-</div>
 
-    <div class="list card">
-      <div class="item item-divider">Health</div>
+    <div class="list card" ng-show="show_result">
+      <div class="item item-divider">Hacker Info</div>
       <div class="item item-body">
-        <div>
-          You ate an apple today!
+        <div ng-hide="bad_result">
+          <h2><b>Hacker:</b> {{hacker.name}}
+          <br><b>School:</b> {{hacker.school_name}}
+          <br><b>T-shirt:</b> {{hacker.tshirt_size}}
+          <br><b>Allergies:</b> {{hacker.dietary_restrictions}}</h2>
         </div>
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Upcoming</div>
-      <div class="item item-body">
-        <div>
-          You have <b>29</b> meetings on your calendar tomorrow.
-        </div>
+        <div ng-show="bad_result">
+          Please direct to checkin help table!
+          </div>
+        <button ng-click="checkIn()" class="button button-block button-positive" style="background-color: green" ng-disabled="bad_result">
+            <i class="icon ion-checkmark"></i>
+            Check in {{hacker.name}}
+            </button>
+            
       </div>
     </div>
   </ion-content>
