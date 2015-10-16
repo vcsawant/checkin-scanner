@@ -17,13 +17,14 @@ angular.module('starter.controllers', ['ngCordova','restangular'])
             $scope.input_email=imageData.text;
             console.log("Barcode Format -> " + imageData.format);
             console.log("Cancelled -> " + imageData.cancelled);
+            $scope.processEmail();
         }, function(error) {
             console.log("An error happened -> " + error);
         });
     };
 
   $scope.processEmail = function() {
-    Restangular.setBaseUrl("http://localhost:3000");
+    Restangular.setBaseUrl("https://boilermake.org");
     Restangular.one('/execs/hacker_checkin_info')
                .get({'checkin_token': '9kvKkdcDyOxvA9aZ35QJJw','email':$scope.input_email})
                .then(function (response) {
@@ -31,6 +32,10 @@ angular.module('starter.controllers', ['ngCordova','restangular'])
                     console.log(response);
                     $scope.hacker = response;
                     if(response.status=="not_found")
+                    {
+                      $scope.bad_result=true;
+                    }
+                    else if(response.status=="forbidden")
                     {
                       $scope.bad_result=true;
                     }
@@ -43,7 +48,7 @@ angular.module('starter.controllers', ['ngCordova','restangular'])
             );
   }; 
   $scope.checkIn = function() {
-    Restangular.setBaseUrl("http://localhost:3000");
+    Restangular.setBaseUrl("https://boilermake.org");
     console.log($scope.input_email);
     Restangular.all('/execs/checkin')
                .customPOST({'checkin_token': '9kvKkdcDyOxvA9aZ35QJJw','email':$scope.input_email})

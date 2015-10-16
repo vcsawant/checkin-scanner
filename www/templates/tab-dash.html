@@ -1,7 +1,7 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding">
     <div class="card">
-        <div class="item item-divider">Hacker Lookup ( Last checked in: {{last_checked_in}})</div>
+        <div class="item item-divider">prev: {{last_checked_in}}</div>
         <div class="item">
           <button ng-click="scanBarcode()" class="button button-block button-positive">
             <i class="icon ion-qr-scanner"></i>
@@ -27,7 +27,8 @@
           <h2><b>Hacker:</b> {{hacker.name}}
           <br><b>School:</b> {{hacker.school_name}}
           <br><b>T-shirt:</b> {{hacker.tshirt_size}}
-          <br><b>Allergies:</b> {{hacker.dietary_restrictions}}</h2>
+          <br><b>Allergies:</b> {{hacker.dietary_restrictions}}
+          <br><b>Checked in time?</b> {{hacker.checked_in_time}}</h2>
         </div>
         <div ng-show="bad_result">
           Please direct to checkin help table!
