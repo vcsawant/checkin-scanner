@@ -1,1 +1,1 @@
-cordova plugin add https://github.com/wildabeast/BarcodeScanner.git
+cordova plugin add https://github.com/phonegap/phonegap-plugin-barcodescanner
