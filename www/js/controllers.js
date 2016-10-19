@@ -24,8 +24,8 @@ angular.module('starter.controllers', ['ngCordova','restangular'])
     };
 
   $scope.processEmail = function() {
-    Restangular.setBaseUrl("https://boilermake.org");
-    Restangular.one('/execs/hacker_checkin_info')
+    Restangular.setBaseUrl("https://vandyhacks.org");
+    Restangular.one('/api/checkemail')
                .get({'checkin_token': '9kvKkdcDyOxvA9aZ35QJJw','email':$scope.input_email})
                .then(function (response) {
                     $scope.show_result=true;
@@ -48,9 +48,9 @@ angular.module('starter.controllers', ['ngCordova','restangular'])
             );
   }; 
   $scope.checkIn = function() {
-    Restangular.setBaseUrl("https://boilermake.org");
+    Restangular.setBaseUrl("https://vandyhacks.org");
     console.log($scope.input_email);
-    Restangular.all('/execs/checkin')
+    Restangular.all('/api/checkin')
                .customPOST({'checkin_token': '9kvKkdcDyOxvA9aZ35QJJw','email':$scope.input_email})
                .then(function(data) {
                 console.log(data);
