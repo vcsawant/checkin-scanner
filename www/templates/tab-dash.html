@@ -27,11 +27,12 @@
           <h2><b>Hacker:</b> {{hacker.name}}
           <br><b>School:</b> {{hacker.school_name}}
           <br><b>T-shirt:</b> {{hacker.tshirt_size}}
-          <br><b>Allergies:</b> {{hacker.dietary_restrictions}}
+          <br><b>Dietary Restrictions:</b> {{hacker.dietary_restrictions}}
+          <br><b>Phone Number:</b> <span ng-style="hacker.phone_valid && {'color': 'red'}">{{hacker.phone_number}}</span>
           <br><b>Checked in time?</b><a style="color: red">{{hacker.checked_in_time}}</a></h2>
         </div>
         <div ng-show="bad_result">
-          Please direct to checkin help table!
+          {{hacker.message}}
           </div>
         <button ng-click="checkIn()" class="button button-block button-positive" style="background-color: green" ng-disabled="bad_result">
             <i class="icon ion-checkmark"></i>

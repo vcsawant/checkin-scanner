@@ -11,17 +11,17 @@ angular.module('starter.controllers', ['ngCordova','restangular'])
 
   $scope.scanBarcode = function() {
     clearForms();
-        $scope.input_email = "waiting";
-        $cordovaBarcodeScanner.scan().then(function(imageData) {
-            // alert(imageData.text);
-            $scope.input_email=imageData.text;
-            console.log("Barcode Format -> " + imageData.format);
-            console.log("Cancelled -> " + imageData.cancelled);
-            $scope.processEmail();
-        }, function(error) {
-            console.log("An error happened -> " + error);
-        });
-    };
+    $scope.input_email = "waiting";
+    $cordovaBarcodeScanner.scan().then(function(imageData) {
+        // alert(imageData.text);
+        $scope.input_email=imageData.text;
+        console.log("Barcode Format -> " + imageData.format);
+        console.log("Cancelled -> " + imageData.cancelled);
+        $scope.processEmail();
+    }, function(error) {
+        console.log("An error happened -> " + error);
+    });
+  };
 
   $scope.processEmail = function() {
     Restangular.setBaseUrl("https://vandyhacks.org");
@@ -30,23 +30,12 @@ angular.module('starter.controllers', ['ngCordova','restangular'])
                .then(function (response) {
                     $scope.show_result=true;
                     console.log(response);
-                    $scope.hacker = response;
-                    if(response.status=="not_found")
-                    {
-                      $scope.bad_result=true;
-                    }
-                    else if(response.status=="forbidden")
-                    {
-                      $scope.bad_result=true;
-                    }
-                    else
-                    {
-                      $scope.bad_result=false;
-                    }
-
+                    $scope.hacker = response;                    
+                    $scope.bad_result=!response.success;                                                                                  
                 }
             );
   }; 
+
   $scope.checkIn = function() {
     Restangular.setBaseUrl("https://vandyhacks.org");
     console.log($scope.input_email);
