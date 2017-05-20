@@ -1,4 +1,9 @@
-<ion-view view-title="Dashboard">
+<ion-view view-title={{dashTitle}}>
+
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+
   <ion-content class="padding">
     <div class="card">
         <div class="item item-divider">prev: {{last_checked_in}}</div>

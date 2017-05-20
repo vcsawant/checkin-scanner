@@ -9,6 +9,11 @@ angular.module('starter.controllers', ['ngCordova','restangular'])
     $scope.show_result = false;
   }
 
+  //updates title of check-in page to match event
+  $scope.$on('event-selected', function(events, args) {
+    $scope.dashTitle=args;
+  });
+
   $scope.scanBarcode = function() {
     clearForms();
     $scope.input_email = "waiting";
@@ -36,6 +41,7 @@ angular.module('starter.controllers', ['ngCordova','restangular'])
             );
   }; 
 
+  // ! needs editing as API is updated !
   $scope.checkIn = function() {
     Restangular.setBaseUrl("https://vandyhacks.org");
     console.log($scope.input_email);
@@ -49,6 +55,23 @@ angular.module('starter.controllers', ['ngCordova','restangular'])
 
   };
 
+})
+
+
+//controller for the event menu
+.controller('EventsCtrl', function($scope, $rootScope) {
+  $scope.clicked=function(str){
+
+    $rootScope.$broadcast('event-selected',str);
+
+  }
+  //load events here using api
+  $scope.events = [
+    { event: 'Hackathon' },
+    { event: 'Lunch' },
+    { event: 'Dinner' },
+    { event: 'Lecture' }
+  ];
 })
 
 .controller('ChatsCtrl', function($scope, Chats) {
